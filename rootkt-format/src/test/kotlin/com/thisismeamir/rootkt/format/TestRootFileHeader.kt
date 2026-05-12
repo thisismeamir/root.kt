@@ -1,5 +1,6 @@
 package com.thisismeamir.rootkt.format
 
+import com.thisismeamir.rootkt.format.walkers.parseRootHeader
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -7,7 +8,7 @@ import java.io.File
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-class RootFileHeaderTest {
+class TestRootFileHeader {
 
     // Bytes crafted from the real fcc_ha_ecm240_hbb.root xxd dump.
     // Header is exactly 100 bytes; we only need the first ~45 for the fixed fields.
