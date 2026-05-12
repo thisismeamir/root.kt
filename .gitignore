@@ -1,0 +1,125 @@
+# =========================
+# Build / Output
+# =========================
+
+build/
+out/
+target/
+bin/
+dist/
+tmp/
+*.class
+*.jar
+*.war
+*.ear
+
+# =========================
+# Gradle
+# =========================
+
+.gradle/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local Gradle config
+
+gradle-app.setting
+
+# =========================
+# IntelliJ IDEA
+# =========================
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IntelliJ caches
+
+out/
+.idea_modules/
+
+# =========================
+# VS Code
+# =========================
+
+.vscode/
+
+# =========================
+# OS / System
+# =========================
+
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+
+*~
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+*.key
+*.pem
+
+# =========================
+# Kotlin / JVM
+# =========================
+
+*.kotlin_metadata
+
+# =========================
+# Native / JNI (if any)
+# =========================
+
+*.so
+*.dylib
+*.dll
+
+# =========================
+# ROOT / Data files
+# =========================
+
+*.root
+*.root.*
+*.lhe
+*.hepmc
+
+# =========================
+# Archives / Large files
+# =========================
+
+*.zip
+*.tar
+*.gz
+*.bz2
+*.xz
+*.7z
+
+# =========================
+# Temporary / Scratch
+# =========================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# =========================
+# Coverage / Reports
+# =========================
+
+coverage/
+reports/
+*.exec
