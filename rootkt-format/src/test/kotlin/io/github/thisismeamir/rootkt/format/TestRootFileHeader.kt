@@ -1,6 +1,6 @@
-package com.thisismeamir.rootkt.format
+package io.github.thisismeamir.rootkt.format
 
-import com.thisismeamir.rootkt.format.walkers.parseRootHeader
+import io.github.thisismeamir.rootkt.format.walkers.parseRootHeader
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

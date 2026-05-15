@@ -1,7 +1,7 @@
-package com.thisismeamir.rootkt.format
+package io.github.thisismeamir.rootkt.format
 
-import com.thisismeamir.rootkt.format.walkers.parseKey
-import com.thisismeamir.rootkt.format.walkers.walkKeys
+import io.github.thisismeamir.rootkt.format.walkers.parseKey
+import io.github.thisismeamir.rootkt.format.walkers.walkKeys
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.io.FileInputStream

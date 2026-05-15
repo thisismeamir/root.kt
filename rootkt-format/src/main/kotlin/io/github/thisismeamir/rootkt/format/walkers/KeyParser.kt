@@ -1,6 +1,6 @@
-package com.thisismeamir.rootkt.format.walkers
+package io.github.thisismeamir.rootkt.format.walkers
 
-import com.thisismeamir.rootkt.format.models.RootTKey
+import io.github.thisismeamir.rootkt.format.models.RootTKey
 import java.nio.ByteBuffer
 
 /**

@@ -1,4 +1,4 @@
-package com.thisismeamir.rootkt.format.models
+package io.github.thisismeamir.rootkt.format.models
 
 /**
  * Represents the fixed-length (100 bytes) header of a ROOT file.

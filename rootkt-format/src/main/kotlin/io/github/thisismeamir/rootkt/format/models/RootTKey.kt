@@ -1,4 +1,4 @@
-package com.thisismeamir.rootkt.format.models
+package io.github.thisismeamir.rootkt.format.models
 
 /**
  * Represents the key (index entry) of a single data record in a ROOT file.

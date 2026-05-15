@@ -1,6 +1,6 @@
-package com.thisismeamir.rootkt.format.walkers
+package io.github.thisismeamir.rootkt.format.walkers
 
-import com.thisismeamir.rootkt.format.models.RootFileHeader
+import io.github.thisismeamir.rootkt.format.models.RootFileHeader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
