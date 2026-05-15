@@ -20,14 +20,14 @@ class TestRootFileHeader {
         buf.put("root".toByteArray())          // magic
         buf.putInt(0x0000f48e)                 // fVersion = 62606  (32-bit file)
         buf.putInt(0x00000064)                 // fBEGIN   = 100
-        buf.putInt(0x10c2cf52.toInt())         // fEND     (32-bit)
+        buf.putInt(0x10c2cf52)         // fEND     (32-bit)
         buf.putInt(0x01dc1e54)                 // fSeekFree
         buf.putInt(0x00000081)                 // fNbytesFree
         buf.putInt(0x00000008)                 // nfree
         buf.putInt(0x00000042)                 // fNbytesName = 66
         buf.put(0x04)                          // fUnits = 4
         buf.putInt(0x00000065)                 // fCompress
-        buf.putInt(0x10c2a35e.toInt())         // fSeekInfo
+        buf.putInt(0x10c2a35e)         // fSeekInfo
         buf.putInt(0x00002bf4)                 // fNbytesInfo
         // UUID version (2 bytes) + UUID (16 bytes) — zeroed for this test
         buf.putShort(0x0001)
