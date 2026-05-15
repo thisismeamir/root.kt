@@ -1,12 +1,10 @@
 name: Publish to Maven Central
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_call:
 
 jobs:
-  publish:
+  publish-maven:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,7 +14,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Publish
+      - name: Publish to Maven Central
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
