@@ -5,6 +5,8 @@ plugins {
     id("com.gradleup.nmcp.aggregation") version "1.4.4"
 }
 
+version = project.property("version") as String
+
 nmcpAggregation {
     centralPortal {
         username = System.getenv("SONATYPE_USERNAME")

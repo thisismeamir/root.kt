@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.thisismeamir"
-version = "0.0.1"
+version =  project.property("version") as String
 
 java {
     withSourcesJar()
