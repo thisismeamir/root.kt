@@ -1,4 +1,4 @@
-package io.github.thisismeamir.rootkt.compression.walkers
+package io.github.thisismeamir.rootkt.format.walkers
 
 import io.github.thisismeamir.rootkt.compression.models.CompressedBlock
 import io.github.thisismeamir.rootkt.compression.models.CompressionType
