@@ -141,44 +141,6 @@ class TestRootTKey {
 
     // --- walker tests ---
 
-    private fun twoKeyBuffer(): ByteBuffer {
-        val buf = ByteBuffer.allocate(600).order(ByteOrder.BIG_ENDIAN)
-
-        // Key 1 at offset 0 (represents fBEGIN=100 in file, here at 0 for simplicity)
-        buf.putInt(126)              // fNbytes
-        buf.putShort(4)              // fVersion (small key)
-        buf.putInt(77)               // fObjLen
-        buf.putInt(0x7c6ea255) // fDatime
-        buf.putShort(49)             // fKeyLen
-        buf.putShort(1)              // fCycle
-        buf.putInt(100)              // fSeekKey
-        buf.putInt(0)                // fSeekPdir
-        buf.put(5); buf.put("TFile".toByteArray())
-        buf.put(15); buf.put("events_100.root".toByteArray())
-        buf.put(0)                   // empty title
-        // pad to 126 bytes total
-        val key1End = 126
-        buf.position(key1End)
-
-        // Key 2 at offset 126 (large key, fVersion=1004)
-        buf.putInt(316)              // fNbytes
-        buf.putShort(1004)           // fVersion (large key)
-        buf.putInt(28656)            // fObjLen
-        buf.putInt(0x7c6ea260) // fDatime
-        buf.putShort(105)            // fKeyLen
-        buf.putShort(0)              // fCycle
-        buf.putLong(226)             // fSeekKey (8 bytes)
-        buf.putLong(100)             // fSeekPdir (8 bytes)
-        buf.put(7); buf.put("TBasket".toByteArray())
-        buf.put(36); buf.put("ReconstructedParticles.covMatrix[10]".toByteArray())
-        buf.put(6); buf.put("events".toByteArray())
-        // pad to 126+316 bytes total
-        buf.position(key1End + 316)
-
-        buf.rewind()
-        return buf
-    }
-
     @Test
     fun `walker returns two keys`() {
         val keys = twoKeyBuffer().walkKeys(begin = 0, end = (126 + 316).toLong())
