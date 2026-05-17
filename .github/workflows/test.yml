@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
@@ -19,16 +19,33 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set up ROOT
+      - name: Install ROOT dependencies
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y -q dpkg-dev cmake g++ gcc binutils \
-            libx11-dev libxpm-dev libxft-dev libxext-dev libssl-dev \
-            libgsl-dev
+          sudo apt-get install -y -q \
+            dpkg-dev cmake g++-11 gcc-11 binutils \
+            libx11-dev libxpm-dev libxft-dev libxext-dev \
+            libssl-dev libgsl-dev \
+            libtbb-dev libstdc++-11-dev
+
+      - name: Cache ROOT
+        id: cache-root
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/root
+          key: root-6.32.02-ubuntu22.04
+
+      - name: Download ROOT
+        if: steps.cache-root.outputs.cache-hit != 'true'
+        run: |
           wget -q https://root.cern/download/root_v6.32.02.Linux-ubuntu22.04-x86_64-gcc11.4.tar.gz
           tar -xzf root_v6.32.02.Linux-ubuntu22.04-x86_64-gcc11.4.tar.gz
+
+      - name: Configure ROOT environment
+        run: |
           echo "$GITHUB_WORKSPACE/root/bin" >> $GITHUB_PATH
           echo "ROOTSYS=$GITHUB_WORKSPACE/root" >> $GITHUB_ENV
+          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/root/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
 
       - name: Generate test fixtures
         run: |
