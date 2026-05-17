@@ -5,4 +5,7 @@ data class RootStreamerInfo(
     val checksum: Long,
     val classVersion: Int,
     val elements: List<RootStreamerElement>
-)
+) {
+        fun element(name: String): RootStreamerElement? =
+            elements.find { it.name == name }
+}
