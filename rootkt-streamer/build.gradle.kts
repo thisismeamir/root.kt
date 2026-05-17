@@ -17,6 +17,7 @@ java {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(project(":rootkt-compression"))
+    implementation(project(":rootkt-format"))
     testImplementation(kotlin("test"))
 }
 
