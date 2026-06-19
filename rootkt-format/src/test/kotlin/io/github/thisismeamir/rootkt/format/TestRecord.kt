@@ -3,7 +3,7 @@ package io.github.thisismeamir.rootkt.format
 import io.github.thisismeamir.rootkt.compression.algorithms.zlibCompress
 import io.github.thisismeamir.rootkt.compression.models.CompressedBlock
 import io.github.thisismeamir.rootkt.compression.models.CompressionType
-import io.github.thisismeamir.rootkt.format.models.RootBlock
+import io.github.thisismeamir.rootkt.format.models.Block
 import io.github.thisismeamir.rootkt.format.walkers.walkKeys
 import io.github.thisismeamir.rootkt.format.walkers.walkRecords
 import org.junit.jupiter.api.Assertions.assertArrayEquals
@@ -14,7 +14,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 // TestRootRecord.kt
-class TestRootRecord {
+class TestRecord {
 
     private val payload = "some object data".repeat(20).toByteArray()
 
@@ -39,7 +39,7 @@ class TestRootRecord {
 
     @Test
     fun `RootBlock Raw returns data directly`() {
-        val raw = RootBlock.Raw(payload)
+        val raw = Block.Raw(payload)
         assertArrayEquals(payload, raw.data)
         assertEquals(payload.size, raw.rawSize)
     }
@@ -54,7 +54,7 @@ class TestRootRecord {
             uncompressedSize = payload.size,
             data = compressed
         )
-        val rootBlock = RootBlock.Compressed(block)
+        val rootBlock = Block.Compressed(block)
         assertArrayEquals(payload, rootBlock.data)
         assertEquals(payload.size, rootBlock.rawSize)
     }
@@ -90,7 +90,7 @@ class TestRootRecord {
     fun `walkRecords key2 block is compressed and decompresses correctly`() {
         val records = twoKeyBuffer().walkRecords(0, totalSize)
         val block = records[1].block
-        assertTrue(block is RootBlock.Compressed)
+        assertTrue(block is Block.Compressed)
         val expected = "ReconstructedParticles data".repeat(20).toByteArray()
         assertArrayEquals(expected, block.data)
     }

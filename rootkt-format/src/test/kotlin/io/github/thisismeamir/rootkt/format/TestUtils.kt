@@ -1,7 +1,7 @@
 package io.github.thisismeamir.rootkt.format
 
 import io.github.thisismeamir.rootkt.compression.algorithms.zlibCompress
-import io.github.thisismeamir.rootkt.format.models.RootTKey
+import io.github.thisismeamir.rootkt.format.models.TKey
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.test.assertTrue
@@ -63,6 +63,6 @@ fun twoKeyBuffer(): ByteBuffer {
 
 
 
-fun assertNameExists(name: String, keys: List<RootTKey>) {
+fun assertNameExists(name: String, keys: List<TKey>) {
     assertTrue(keys.any { it.name == name }, "Expected to find a key with name '$name', but it was not found among the keys: ${keys.map{it.name}}")
 }

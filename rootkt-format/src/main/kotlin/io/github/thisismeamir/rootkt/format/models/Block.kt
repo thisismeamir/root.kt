@@ -3,16 +3,16 @@ package io.github.thisismeamir.rootkt.format.models
 import io.github.thisismeamir.rootkt.compression.models.CompressedBlock
 import io.github.thisismeamir.rootkt.compression.services.Decompressor
 
-sealed class RootBlock {
+sealed class Block {
     abstract val rawSize: Int
     abstract val data: ByteArray  // always the uncompressed bytes, lazily resolved
 
-    data class Compressed(val block: CompressedBlock) : RootBlock() {
+    data class Compressed(val block: CompressedBlock) : Block() {
         override val rawSize: Int get() = block.uncompressedSize
         override val data: ByteArray by lazy { Decompressor.decompress(block) }
     }
 
-    data class Raw(override val data: ByteArray) : RootBlock() {
+    data class Raw(override val data: ByteArray) : Block() {
         override val rawSize: Int get() = data.size
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

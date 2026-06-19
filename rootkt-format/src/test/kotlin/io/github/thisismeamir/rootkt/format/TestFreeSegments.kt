@@ -7,7 +7,7 @@ import java.nio.ByteOrder
 import kotlin.test.Test
 
 // TestRootFreeSegments.kt
-class TestRootFreeSegments {
+class TestFreeSegments {
 
     private fun freeSegmentsBuffer(large: Boolean): ByteBuffer {
         val buf = ByteBuffer.allocate(256).order(ByteOrder.BIG_ENDIAN)

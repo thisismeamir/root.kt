@@ -8,7 +8,7 @@ import java.io.File
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-class TestRootFileHeader {
+class TestFileHEader {
 
     // Bytes crafted from the real fcc_ha_ecm240_hbb.root xxd dump.
     // Header is exactly 100 bytes; we only need the first ~45 for the fixed fields.

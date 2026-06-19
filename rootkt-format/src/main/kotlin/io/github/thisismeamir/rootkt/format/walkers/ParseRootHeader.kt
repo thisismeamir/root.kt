@@ -1,11 +1,11 @@
 package io.github.thisismeamir.rootkt.format.walkers
 
-import io.github.thisismeamir.rootkt.format.models.RootFileHeader
+import io.github.thisismeamir.rootkt.format.models.FileHEader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 /**
- * Parses a [RootFileHeader] from the current position of this [ByteBuffer].
+ * Parses a [FileHEader] from the current position of this [ByteBuffer].
  *
  * This function reads the fixed 100-byte file header that begins every ROOT file.
  * The header is always at byte offset 0, always big-endian, and never compressed.
@@ -13,20 +13,20 @@ import java.nio.ByteOrder
  * byte 63 after reading (end of the fixed header fields, before the reserved padding).
  *
  * The header layout differs slightly between standard files and large files (>2 GB).
- * In large files, [RootFileHeader.end], [RootFileHeader.seekFree], and
- * [RootFileHeader.seekInfo] are stored as 8-byte integers rather than 4-byte integers.
- * This is detected automatically by checking if [RootFileHeader.version] >= 1,000,000.
+ * In large files, [FileHEader.end], [FileHEader.seekFree], and
+ * [FileHEader.seekInfo] are stored as 8-byte integers rather than 4-byte integers.
+ * This is detected automatically by checking if [FileHEader.version] >= 1,000,000.
  *
  * The UUID is always read from the fixed absolute position 47, regardless of the
  * large-file layout, because the reserved padding region (bytes 63–99) ensures
  * there is always room for the 64-bit fields without shifting the UUID.
  *
  * @receiver A [ByteBuffer] wrapping at least 100 bytes of a ROOT file, positioned at 0.
- * @return A fully populated [RootFileHeader].
+ * @return A fully populated [FileHEader].
  * @throws IllegalArgumentException if the first 4 bytes are not the magic string "root",
  *   indicating this is not a valid ROOT file.
  */
-fun ByteBuffer.parseRootHeader(): RootFileHeader {
+fun ByteBuffer.parseRootHeader(): FileHEader {
     order(ByteOrder.BIG_ENDIAN)
 
     // Every ROOT file begins with the 4-byte magic string "root" (lowercase).
@@ -40,7 +40,7 @@ fun ByteBuffer.parseRootHeader(): RootFileHeader {
     // ROOT signals this by adding 1,000,000 to the actual format version number.
     val large = version >= 1_000_000
 
-    return RootFileHeader(
+    return FileHEader(
         version    = version,
         begin      = int,
 

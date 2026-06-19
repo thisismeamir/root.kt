@@ -10,7 +10,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.channels.FileChannel
 
-class TestRootTKey {
+class TestTKey {
 
     // Bytes from fcc_ha_ecm240_hbb.root at offset 100 (fBEGIN), xxd-verified.
     private fun realKeyBytes(): ByteBuffer {

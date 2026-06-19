@@ -71,7 +71,7 @@ package io.github.thisismeamir.rootkt.format.models
  *
  * @property title Human-readable description of the object. Optional — may be empty.
  */
-data class RootTKey(
+data class TKey(
     val nbytes: Int,
     val version: Short,
     val objLen: Int,

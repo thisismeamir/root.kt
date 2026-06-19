@@ -2,7 +2,7 @@ package io.github.thisismeamir.rootkt.format
 
 import io.github.thisismeamir.rootkt.compression.algorithms.zlibCompress
 import io.github.thisismeamir.rootkt.compression.models.CompressionType
-import io.github.thisismeamir.rootkt.format.models.RootBlock
+import io.github.thisismeamir.rootkt.format.models.Block
 import io.github.thisismeamir.rootkt.format.walkers.parseCompressedBlock
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.assertThrows
@@ -50,7 +50,7 @@ class TestParseCompressedBlock {
     @Test
     fun `decompresses correctly via RootBlock`() {
         val block = zlibBlockBytes(payload).parseCompressedBlock()
-        val rootBlock = RootBlock.Compressed(block)
+        val rootBlock = Block.Compressed(block)
         assertArrayEquals(payload, rootBlock.data)
     }
 

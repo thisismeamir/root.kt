@@ -1,19 +1,19 @@
 package io.github.thisismeamir.rootkt.format.walkers
 
-import io.github.thisismeamir.rootkt.format.models.RootBlock
-import io.github.thisismeamir.rootkt.format.models.RootRecord
+import io.github.thisismeamir.rootkt.format.models.Block
+import io.github.thisismeamir.rootkt.format.models.Record
 import java.nio.ByteBuffer
 
-fun ByteBuffer.walkRecords(begin: Int, end: Long): List<RootRecord> =
+fun ByteBuffer.walkRecords(begin: Int, end: Long): List<Record> =
     walkKeys(begin, end).map { key ->
         position(key.seekKey.toInt() + key.keyLen)
         val payloadBytes = ByteArray(key.dataSize).also { get(it) }
         val block = if (key.isCompressed) {
-            RootBlock.Compressed(
+            Block.Compressed(
                 ByteBuffer.wrap(payloadBytes).parseCompressedBlock()
             )
         } else {
-            RootBlock.Raw(payloadBytes)
+            Block.Raw(payloadBytes)
         }
-        RootRecord(key, block)
+        Record(key, block)
     }
