@@ -19,6 +19,8 @@ dependencies {
     implementation(project(":rootkt-compression"))
     implementation(project(":rootkt-format"))
     testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
 }
 
 tasks.test {
