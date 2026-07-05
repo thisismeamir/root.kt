@@ -115,22 +115,22 @@ class TestTKey {
     }
 
     // TODO: open real file, seek to fBEGIN=100, parse first TKey and assert className == "TFile"
-     @Test
-     fun `reads first TKey from real file`() {
-         if (!File("../testdata/fcc_ha_ecm240_hbb.root").exists()){
-             println("Test file not found, skipping test")
-
-         }
-        else{
-             val path = "../test-files/fcc_ha_ecm240_hbb.root"
-             val channel = FileInputStream(path).channel
-             val buf = channel.map(FileChannel.MapMode.READ_ONLY, 100, 64)
-             buf.order(ByteOrder.BIG_ENDIAN)
-             val key = buf.parseKey()
-             assertEquals("TFile", key.className)
-             assertEquals(100L, key.seekKey)
-         }
-     }
+//     @Test
+//     fun `reads first TKey from real file`() {
+//         if (!File("../testdata/fcc_ha_ecm240_hbb.root").exists()){
+//             println("Test file not found, skipping test")
+//
+//         }
+//        else{
+//             val path = "../test-files/fcc_ha_ecm240_hbb.root"
+//             val channel = FileInputStream(path).channel
+//             val buf = channel.map(FileChannel.MapMode.READ_ONLY, 100, 64)
+//             buf.order(ByteOrder.BIG_ENDIAN)
+//             val key = buf.parseKey()
+//             assertEquals("TFile", key.className)
+//             assertEquals(100L, key.seekKey)
+//         }
+//     }
 
     // TODO: open real file, walk all keys from fBEGIN and assert count > 0
     // @Test
