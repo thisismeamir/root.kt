@@ -41,19 +41,9 @@ fun ByteBuffer.parseKey(): TKey {
     val seekKey  = if (large) long else int.toLong()
     val seekPdir = if (large) long else int.toLong()
 
-    /**
-     * Reads a ROOT Pascal-style string from the buffer.
-     *
-     * ROOT stores short strings as a 1-byte unsigned length followed by that many
-     * UTF-8 bytes. The length byte is masked with 0xFF to treat it as unsigned,
-     * since Kotlin's [ByteBuffer.get] returns a signed Byte — without the mask,
-     * strings longer than 127 bytes would produce a negative length.
-     */
-    fun ByteBuffer.readRootString(): String {
-        val len = get().toInt() and 0xFF
-        if (len == 0) return ""
-        return ByteArray(len).also { get(it) }.toString(Charsets.UTF_8)
-    }
+    val className = readTString()
+    val name = readTString()
+    val title = readTString()
 
     return TKey(
         nbytes   = nbytes,
@@ -65,9 +55,9 @@ fun ByteBuffer.parseKey(): TKey {
         seekKey  = seekKey,
         seekPdir = seekPdir,
         // Class name identifies which streamer to use for deserialization (e.g. "TH1F").
-        className = readRootString(),
+        className = className,
         // Name and cycle together uniquely identify this object within its directory.
-        name      = readRootString(),
-        title     = readRootString()
+        name      = name,
+        title     = title
     )
 }
