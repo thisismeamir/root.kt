@@ -10,6 +10,5 @@ data class TStreamerInfo(
     val tNamed: TNamed,
     val fCheckSum: Int,
     val fClassVersion: Int,
-    // Just For debugging we change this to ByteArray, otherwise it should be TStreamerElement
     val objectArray: TObjectArray<TStreamerElement>
 )
