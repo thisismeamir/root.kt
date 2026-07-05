@@ -17,6 +17,8 @@ nmcpAggregation {
 
 dependencies {
     nmcpAggregation(project(":rootkt-format"))
+    nmcpAggregation(project(":rootkt-compression"))
+    nmcpAggregation(project(":rootkt-streamer"))
 }
 
 allprojects {
