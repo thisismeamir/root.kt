@@ -57,7 +57,7 @@ package io.github.thisismeamir.rootkt.format.models
  *   Assigned at creation time. Used by TRef and TRefArray to identify cross-file
  *   object references unambiguously across time and space.
  */
-data class FileHEader(
+data class FileHeader(
     val version: Int,
     val begin: Int,
     val end: Long,
@@ -81,7 +81,7 @@ data class FileHEader(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as FileHEader
+        other as FileHeader
         if (version != other.version) return false
         if (begin != other.begin) return false
         if (end != other.end) return false
