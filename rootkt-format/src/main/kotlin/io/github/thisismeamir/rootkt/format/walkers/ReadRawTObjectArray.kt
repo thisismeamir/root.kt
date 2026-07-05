@@ -21,11 +21,9 @@ fun ByteBuffer.readRawTObjectArray(): RawTObjectArray {
     // Compute remaining bytes assigned strictly to the objects array payload frame
     val headerBytesReadInside = position() - innerPayloadStart
     val objectsPayloadSize = innerByteCount - headerBytesReadInside
-
     val objectsData = ByteArray(objectsPayloadSize)
     get(objectsData)
 
-    // Ensure the stream cursor lands exactly at the end boundary of the TObjArray frame
     position(innerPayloadStart + innerByteCount)
 
     return RawTObjectArray(
