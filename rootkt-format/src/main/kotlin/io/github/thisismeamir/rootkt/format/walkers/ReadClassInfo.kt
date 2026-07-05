@@ -21,7 +21,7 @@ fun ByteBuffer.readClassInfo(): ClassInfo {
     } else {
         // Case B: It's an old class reference tag.
         // Clear out the 0x80000000 flag bit to get the actual byte offset
-        val trueOffset = (tagOrIndex and K_CLASS_MASK.inv()) - 2
+        val trueOffset = (tagOrIndex and K_CLASS_MASK.inv())
         ClassInfo(
             isNewClass = false,
             clIdx = trueOffset,
