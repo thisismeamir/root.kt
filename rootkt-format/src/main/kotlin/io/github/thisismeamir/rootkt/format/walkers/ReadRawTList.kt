@@ -6,25 +6,17 @@ import java.nio.ByteBuffer
 
 fun ByteBuffer.readRawTList(): RawTList {
     val byteCount = readByteCount()
-    val payloadStartPosition = position()
-
+    val payloadStart = position() // start of versioned payload
     val version = short
-
-    // 1. Consume the TObject base class bytes
     val tObject = readTObject()
-    val fName  = readTString()
-
+    val fName = readTString()
     val numberOfObjects = int
-
-    // 3. Compute remaining bytes based on actual position reached
-    val headerBytesRead = position() - payloadStartPosition
-    val objectsPayloadSize = byteCount - headerBytesRead
-
+    val objectsPayloadSize = byteCount - position()
     val objectsData = ByteArray(objectsPayloadSize)
     get(objectsData)
 
-    // 4. Align perfectly to the end of the TList record boundary
-    position(payloadStartPosition + byteCount)
+    val end = payloadStart + byteCount
+    position(end)
 
     return RawTList(
         byteCount = byteCount,
