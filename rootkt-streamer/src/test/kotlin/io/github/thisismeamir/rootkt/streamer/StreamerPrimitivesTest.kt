@@ -6,7 +6,7 @@ import java.nio.ByteOrder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class TestStreamerPrimitives {
+class StreamerPrimitivesTest {
 
     @Test
     fun `readTString reads short string`() {
