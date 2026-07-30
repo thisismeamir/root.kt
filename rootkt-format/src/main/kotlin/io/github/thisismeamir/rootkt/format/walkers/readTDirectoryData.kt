@@ -1,9 +1,9 @@
 package io.github.thisismeamir.rootkt.format.walkers
 
-import io.github.thisismeamir.rootkt.format.models.TDirectory
+import io.github.thisismeamir.rootkt.format.models.TDirectoryData
 import io.github.thisismeamir.rootkt.format.models.TKey
 import java.nio.ByteBuffer
-fun ByteBuffer.readTDirectory(): TDirectory {
+fun ByteBuffer.readTDirectoryData(): TDirectoryData {
     val version = short
     val datimeC = int
     val datimeM = int
@@ -18,7 +18,7 @@ fun ByteBuffer.readTDirectory(): TDirectory {
     val versiondir = version % 1000
     val uuid = if (versiondir > 1) ByteArray(16).also { get(it) } else null
 
-    return TDirectory(version, datimeC, datimeM, nbytesKeys, nbytesName, seekDir, seekParent, seekKeys, uuid)
+    return TDirectoryData(version, datimeC, datimeM, nbytesKeys, nbytesName, seekDir, seekParent, seekKeys, uuid)
 }
 
 fun List<TKey>.buildDirectoryTree(rootSeekKey: Long): Map<Long, List<TKey>> =
