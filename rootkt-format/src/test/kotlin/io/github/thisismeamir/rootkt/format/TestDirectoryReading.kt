@@ -1,10 +1,8 @@
 package io.github.thisismeamir.rootkt.format
 
 import io.github.thisismeamir.rootkt.format.models.TDirectoryData
-import io.github.thisismeamir.rootkt.format.walkers.parseKey
-import io.github.thisismeamir.rootkt.format.walkers.parseRootHeader
-import io.github.thisismeamir.rootkt.format.walkers.readTDirectoryData
-import io.github.thisismeamir.rootkt.format.walkers.walkKeys
+import io.github.thisismeamir.rootkt.format.utils.printTree
+import io.github.thisismeamir.rootkt.format.walkers.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -72,16 +70,9 @@ class TestDirectoryReading {
     @ParameterizedTest
     @ValueSource(
         strings = [
-            "simple_th1.root",
-            "simple_th2.root",
-            "simple_ttree.root",
-            "array_branches.root",
-            "subdirectory.root",
-            "multi_tree.root",
-            "uncompressed.root",
-            "profile.root",
-            "tgraph.root",
-            "ntuple.root"
+            "simple_th1.root", "simple_th2.root", "simple_ttree.root",
+            "array_branches.root", "subdirectory.root", "multi_tree.root",
+            "uncompressed.root", "profile.root", "tgraph.root", "ntuple.root", "deep_subdirectory.root"
         ]
     )
     fun `parses TDirectory payload after key`(filename: String) {
@@ -125,33 +116,66 @@ class TestDirectoryReading {
         print("something")
         val keys = buf.walkKeys(header.begin, header.end)
         keys.forEach {
-            println("${it.name}: seekPdir=${it.seekPdir}, seekKey=${it.seekKey}") }
+            println("${it.name}: seekPdir=${it.seekPdir}, seekKey=${it.seekKey}")
+        }
     }
 
-    @Test
-    fun `finds all subdirectory keys and parses their TDirectory payloads`() {
-        val bytes = File("src/test/resources/subdirectory.root").readBytes()
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "simple_th1.root", "simple_th2.root", "simple_ttree.root",
+            "array_branches.root", "subdirectory.root", "multi_tree.root",
+            "uncompressed.root", "profile.root", "tgraph.root", "ntuple.root", "deep_subdirectory.root"
+        ]
+    )
+    fun `Build directory tree for arbitrary files`(filename: String) {
+        println("File: $filename")
+        val bytes = File("src/test/resources/$filename").readBytes()
         val buf = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN)
         val header = buf.parseRootHeader()
 
-        val keys = buf.walkKeys(header.begin, header.end)
-        val subdirKey = keys.filter {
-            it.className == "TDirectory"
-        }
-        val subdirectories = mutableListOf<TDirectoryData>()
+        val root = buf.walkRoot(header)
+        root.printTree()
 
-        subdirKey.forEach {
-            buf.position(it.seekKey.toInt() + it.keyLen)
-            subdirectories.add(
-                buf.readTDirectoryData()
-            )
-        }
-
-        subdirectories.forEach {
-            println(
-                it.uuid
-            )
-        }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["subdirectory.root"])
+    fun `Read own keys of a directory`(filename: String) {
+        val bytes = File("src/test/resources/$filename").readBytes()
+        val buf = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN)
+        val header = buf.parseRootHeader()
+
+        val topKeys = buf.walkKeys(header.begin, header.end)
+        val detectorKey = topKeys.first { it.name == "detector" }
+        val detectorDir = buf.walkDirectory(detectorKey.seekKey.toInt())
+        println(detectorDir.data)
+        val ownKeys = detectorDir.readOwnKeys(buf)
+        println("detector's own keys: ${ownKeys.map { it.name to it.className }}")
+    }
+
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "subdirectory.root"
+        ]
+    )
+    fun `Walk subdirectories and objects of a directory`(filename: String) {
+        val bytes = File("src/test/resources/$filename").readBytes()
+        val buf = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN)
+        val header = buf.parseRootHeader()
+
+        val topKeys = buf.walkKeys(header.begin, header.end)
+        val detectorKey = topKeys.first { it.name == "detector" }
+        val detectorDir = buf.walkDirectory(detectorKey.seekKey.toInt())
+
+        println("detector subdirectories: ${detectorDir.walkSubDirectories(buf).map { it.key.name }}")
+        println("detector objects: ${detectorDir.objects(buf).map { it.name to it.className }}")
+
+        val triggerKey = topKeys.first { it.name == "trigger" }
+        val triggerDir = buf.walkDirectory(triggerKey.seekKey.toInt())
+
+        println("trigger subdirectories: ${triggerDir.walkSubDirectories(buf).map { it.key.name }}")
+        println("trigger objects: ${triggerDir.objects(buf).map { it.name to it.className }}")
+    }
 }
