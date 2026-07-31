@@ -61,3 +61,8 @@ fun ByteBuffer.parseKey(): TKey {
         title     = title
     )
 }
+
+infix fun ByteBuffer.parseKeyFrom(startPosition: Int): TKey {
+    this.position(startPosition)
+    return this.parseKey()
+}

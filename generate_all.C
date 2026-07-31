@@ -84,6 +84,50 @@ void generate_all(const char* outdir = ".") {
         h2.Write();
     });
 
+// 6. deep_subdirectory.root — TFile with multiple levels of nested TDirectories
+generate(base + "/deep_subdirectories.root", [&](TFile* f) {
+    TH1F top("summary", "Top-level summary;x;counts", 20, 0, 20);
+    for (int i = 0; i < 200; i++) top.Fill(rng.Uniform(0, 20));
+    top.Write();
+
+    TDirectory* detector = f->mkdir("detector");
+    detector->cd();
+    TH1F hits("hits", "Detector hits;n;counts", 50, 0, 50);
+    for (int i = 0; i < 500; i++) hits.Fill(rng.Poisson(10));
+    hits.Write();
+
+    TDirectory* calo = detector->mkdir("calorimeter");
+    calo->cd();
+    TH1F energy("energy", "Calorimeter energy;E;counts", 100, 0, 100);
+    for (int i = 0; i < 500; i++) energy.Fill(rng.Gaus(50, 10));
+    energy.Write();
+
+    TDirectory* ecal = calo->mkdir("ecal");
+    ecal->cd();
+    TH1F ecalE("ecal_energy", "ECAL energy;E;counts", 100, 0, 100);
+    for (int i = 0; i < 300; i++) ecalE.Fill(rng.Gaus(30, 5));
+    ecalE.Write();
+
+    TDirectory* hcal = calo->mkdir("hcal");
+    hcal->cd();
+    TH1F hcalE("hcal_energy", "HCAL energy;E;counts", 100, 0, 100);
+    for (int i = 0; i < 300; i++) hcalE.Fill(rng.Gaus(70, 15));
+    hcalE.Write();
+
+    TDirectory* tracker = detector->mkdir("tracker");
+    tracker->cd();
+    TH1F tracks("tracks", "Tracker hits;n;counts", 50, 0, 50);
+    for (int i = 0; i < 400; i++) tracks.Fill(rng.Poisson(8));
+    tracks.Write();
+
+    f->cd();
+    TDirectory* trigger = f->mkdir("trigger");
+    trigger->cd();
+    TH1F rate("rate", "Trigger rate;t;Hz", 100, 0, 100);
+    for (int i = 0; i < 500; i++) rate.Fill(rng.Uniform(0, 100));
+    rate.Write();
+});
+
     // 6. multi_tree.root — multiple TTrees + histograms in same file
     generate(base + "/multi_tree.root", [&](TFile* f) {
         TH1F h("summary", "Summary;x;n", 50, 0, 50);
