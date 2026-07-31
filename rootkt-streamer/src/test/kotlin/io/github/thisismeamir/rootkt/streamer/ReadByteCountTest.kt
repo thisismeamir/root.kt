@@ -19,7 +19,7 @@ class ReadByteCountTest {
     @Test
     fun `strips kByteCountMask flag bit`() {
         val buf = ByteBuffer.allocate(4).order(ByteOrder.BIG_ENDIAN)
-        buf.putInt(0x40000148.toInt()) // flagged, true value 0x148 = 328
+        buf.putInt(0x40000148) // flagged, true value 0x148 = 328
         buf.flip()
         assertEquals(328, buf.readByteCount())
     }
