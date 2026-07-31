@@ -85,7 +85,7 @@ void generate_all(const char* outdir = ".") {
     });
 
 // 6. deep_subdirectory.root — TFile with multiple levels of nested TDirectories
-generate(base + "/deep_subdirectory.root", [&](TFile* f) {
+generate(base + "/deep_subdirectories.root", [&](TFile* f) {
     TH1F top("summary", "Top-level summary;x;counts", 20, 0, 20);
     for (int i = 0; i < 200; i++) top.Fill(rng.Uniform(0, 20));
     top.Write();

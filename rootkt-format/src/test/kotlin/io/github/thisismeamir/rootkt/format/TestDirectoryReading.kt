@@ -72,7 +72,7 @@ class TestDirectoryReading {
         strings = [
             "simple_th1.root", "simple_th2.root", "simple_ttree.root",
             "array_branches.root", "subdirectory.root", "multi_tree.root",
-            "uncompressed.root", "profile.root", "tgraph.root", "ntuple.root", "deep_subdirectory.root"
+            "uncompressed.root", "profile.root", "tgraph.root", "ntuple.root", "deep_subdirectories.root"
         ]
     )
     fun `parses TDirectory payload after key`(filename: String) {
@@ -125,7 +125,7 @@ class TestDirectoryReading {
         strings = [
             "simple_th1.root", "simple_th2.root", "simple_ttree.root",
             "array_branches.root", "subdirectory.root", "multi_tree.root",
-            "uncompressed.root", "profile.root", "tgraph.root", "ntuple.root", "deep_subdirectory.root"
+            "uncompressed.root", "profile.root", "tgraph.root", "ntuple.root", "deep_subdirectories.root"
         ]
     )
     fun `Build directory tree for arbitrary files`(filename: String) {
