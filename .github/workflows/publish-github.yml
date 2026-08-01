@@ -24,4 +24,6 @@ jobs:
         with:
           files: |
             rootkt-format/build/libs/*.jar
+            rootkt-streamer/build/libs/*.jar
+            rootkt-compression/build/libs/*.jar
           generate_release_notes: true
