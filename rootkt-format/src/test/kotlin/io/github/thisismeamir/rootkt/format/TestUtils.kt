@@ -1,7 +1,7 @@
 package io.github.thisismeamir.rootkt.format
 
 import io.github.thisismeamir.rootkt.compression.algorithms.zlibCompress
-import io.github.thisismeamir.rootkt.format.models.TKey
+import io.github.thisismeamir.rootkt.format.models.base.TKey
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.test.assertTrue

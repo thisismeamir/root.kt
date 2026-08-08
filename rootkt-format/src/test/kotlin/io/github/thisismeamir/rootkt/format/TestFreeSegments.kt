@@ -1,6 +1,6 @@
 package io.github.thisismeamir.rootkt.format
 
-import io.github.thisismeamir.rootkt.format.walkers.parseFreeSegments
+import io.github.thisismeamir.rootkt.format.parsers.base.parseFreeSegments
 import org.junit.jupiter.api.Assertions.assertEquals
 import java.nio.ByteBuffer
 import java.nio.ByteOrder

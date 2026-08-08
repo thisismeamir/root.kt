@@ -1,6 +1,6 @@
 package io.github.thisismeamir.rootkt.format
 
-import io.github.thisismeamir.rootkt.format.walkers.parseRootHeader
+import io.github.thisismeamir.rootkt.format.parsers.base.parseRootHeader
 import io.github.thisismeamir.rootkt.format.walkers.walkKeys
 import java.io.File
 import java.nio.ByteBuffer

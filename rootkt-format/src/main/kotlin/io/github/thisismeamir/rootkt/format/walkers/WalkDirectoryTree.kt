@@ -1,8 +1,11 @@
 package io.github.thisismeamir.rootkt.format.walkers
 
-import io.github.thisismeamir.rootkt.format.models.TDirectory
-import io.github.thisismeamir.rootkt.format.models.TDirectoryNode
-import io.github.thisismeamir.rootkt.format.models.TKey
+import io.github.thisismeamir.rootkt.format.models.directory.TDirectory
+import io.github.thisismeamir.rootkt.format.models.directory.TDirectoryNode
+import io.github.thisismeamir.rootkt.format.models.base.TKey
+import io.github.thisismeamir.rootkt.format.parsers.base.parseKey
+import io.github.thisismeamir.rootkt.format.parsers.base.parseKeyFrom
+import io.github.thisismeamir.rootkt.format.parsers.data.parseTDirectoryData
 import java.nio.ByteBuffer
 
 
@@ -10,7 +13,7 @@ fun ByteBuffer.walkDirectory(keyPosition: Int): TDirectory {
     // TODO Assumes the given keyposition is for a directory
     val key = this parseKeyFrom keyPosition
 
-    val data = readTDirectoryData()
+    val data = parseTDirectoryData()
     return TDirectory(key, data)
 }
 

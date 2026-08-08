@@ -1,6 +1,8 @@
 package io.github.thisismeamir.rootkt.format
 
-import io.github.thisismeamir.rootkt.format.models.TDirectoryData
+import io.github.thisismeamir.rootkt.format.parsers.base.parseKey
+import io.github.thisismeamir.rootkt.format.parsers.base.parseRootHeader
+import io.github.thisismeamir.rootkt.format.parsers.data.parseTDirectoryData
 import io.github.thisismeamir.rootkt.format.utils.printTree
 import io.github.thisismeamir.rootkt.format.walkers.*
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -87,7 +89,7 @@ class TestDirectoryReading {
         )
 
         buf.position(header.begin + header.nbytesName)
-        val dir = buf.readTDirectoryData()
+        val dir = buf.parseTDirectoryData()
 
 
         assertEquals(0L, dir.seekParent)
@@ -104,7 +106,7 @@ class TestDirectoryReading {
         val subdirKey = keys.first { it.className == "TDirectory" }
 
         buf.position(subdirKey.seekKey.toInt() + subdirKey.keyLen)
-        val subdir = buf.readTDirectoryData()
+        val subdir = buf.parseTDirectoryData()
         assertEquals(header.begin.toLong(), subdir.seekParent)
     }
 
@@ -134,7 +136,7 @@ class TestDirectoryReading {
         val buf = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN)
         val header = buf.parseRootHeader()
 
-        val root = buf.walkRoot(header)
+        val root = buf.walkRootDirectory(header)
         root.printTree()
 
     }

@@ -1,10 +1,9 @@
 package io.github.thisismeamir.rootkt.format
 
-import io.github.thisismeamir.rootkt.format.walkers.parseRootHeader
+import io.github.thisismeamir.rootkt.format.parsers.base.parseRootHeader
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.io.File
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 

@@ -3,7 +3,7 @@ package io.github.thisismeamir.rootkt.format
 import io.github.thisismeamir.rootkt.compression.algorithms.zlibCompress
 import io.github.thisismeamir.rootkt.compression.models.CompressedBlock
 import io.github.thisismeamir.rootkt.compression.models.CompressionType
-import io.github.thisismeamir.rootkt.format.models.Block
+import io.github.thisismeamir.rootkt.format.models.block.Block
 import io.github.thisismeamir.rootkt.format.walkers.walkKeys
 import io.github.thisismeamir.rootkt.format.walkers.walkRecords
 import org.junit.jupiter.api.Assertions.assertArrayEquals

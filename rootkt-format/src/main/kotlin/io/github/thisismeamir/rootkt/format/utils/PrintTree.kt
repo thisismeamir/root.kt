@@ -1,7 +1,7 @@
 package io.github.thisismeamir.rootkt.format.utils
 
-import io.github.thisismeamir.rootkt.format.models.TDirectoryNode
-import io.github.thisismeamir.rootkt.format.models.TDirectoryRoot
+import io.github.thisismeamir.rootkt.format.models.directory.TDirectoryNode
+import io.github.thisismeamir.rootkt.format.models.directory.TDirectoryRoot
 
 fun TDirectoryNode.printTree(name: String = "/", prefix: String = "", isLast: Boolean = true) {
     println(prefix + (if (prefix.isEmpty()) "" else if (isLast) "└── " else "├── ") + name)

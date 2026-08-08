@@ -1,14 +1,11 @@
 package io.github.thisismeamir.rootkt.format
 
-import io.github.thisismeamir.rootkt.format.walkers.parseKey
+import io.github.thisismeamir.rootkt.format.parsers.base.parseKey
 import io.github.thisismeamir.rootkt.format.walkers.walkKeys
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import java.io.File
-import java.io.FileInputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.nio.channels.FileChannel
 
 class TestTKey {
 
