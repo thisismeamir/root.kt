@@ -1,4 +1,4 @@
-package io.github.thisismeamir.rootkt.streamer.models
+package io.github.thisismeamir.rootkt.streamer.models.types
 
 sealed class StreamerType {
     sealed class BuiltIn : StreamerType() {

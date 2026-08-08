@@ -1,8 +1,9 @@
-package io.github.thisismeamir.rootkt.streamer.models
+package io.github.thisismeamir.rootkt.streamer.models.streamerelement
 
-import io.github.thisismeamir.rootkt.format.models.TNamed
+import io.github.thisismeamir.rootkt.format.models.base.TNamed
+import io.github.thisismeamir.rootkt.streamer.models.types.StreamerType
 
-data class TStreamerBasicType(
+data class TStreamerBase(
     override val byteCount: Int,
     override val version: Short,
     override val named: TNamed,
@@ -11,5 +12,6 @@ data class TStreamerBasicType(
     override val fArrayLength: Int,
     override val fArrayDim: Int,
     override val fMaxIndex: List<Int>,
-    override val fTypeName: String
+    override val fTypeName: String,
+    val fBaseVersion: Int
 ) : TStreamerElement

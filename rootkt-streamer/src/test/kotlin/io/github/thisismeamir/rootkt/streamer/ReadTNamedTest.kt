@@ -1,6 +1,6 @@
 package io.github.thisismeamir.rootkt.streamer
 
-import io.github.thisismeamir.rootkt.format.walkers.readTNamed
+import io.github.thisismeamir.rootkt.format.parsers.base.parseTNamed
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.test.Test
@@ -41,7 +41,7 @@ class ReadTNamedTest {
         val bytes = buildTNamedBytes(4, "fSomeMember", "a data member")
         val buf = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN)
 
-        val named = buf.readTNamed()
+        val named = buf.parseTNamed()
         assertEquals("fSomeMember", named.name)
         assertEquals("a data member", named.title)
         assertEquals(4, named.version)
@@ -52,7 +52,7 @@ class ReadTNamedTest {
         val bytes = buildTNamedBytes(4, "fX", "")
         val buf = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN)
 
-        val named = buf.readTNamed()
+        val named = buf.parseTNamed()
         assertEquals("fX", named.name)
         assertEquals("", named.title)
     }
@@ -62,7 +62,7 @@ class ReadTNamedTest {
         val bytes = buildTNamedBytes(4, "fY", "title") + byteArrayOf(0x7A)
         val buf = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN)
 
-        buf.readTNamed()
+        buf.parseTNamed()
         assertEquals(0x7A, buf.get().toInt() and 0xFF)
     }
 }

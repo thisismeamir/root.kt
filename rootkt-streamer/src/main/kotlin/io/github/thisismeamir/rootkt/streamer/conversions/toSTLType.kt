@@ -1,6 +1,6 @@
-package io.github.thisismeamir.rootkt.streamer.walkers
+package io.github.thisismeamir.rootkt.streamer.conversions
 
-import io.github.thisismeamir.rootkt.streamer.models.STLType
+import io.github.thisismeamir.rootkt.streamer.models.types.STLType
 
 fun Int.toSTLType(): STLType = when (this) {
     1 -> STLType.Vector

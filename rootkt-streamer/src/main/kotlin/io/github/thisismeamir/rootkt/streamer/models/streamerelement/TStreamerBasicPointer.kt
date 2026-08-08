@@ -1,8 +1,9 @@
-package io.github.thisismeamir.rootkt.streamer.models
+package io.github.thisismeamir.rootkt.streamer.models.streamerelement
 
-import io.github.thisismeamir.rootkt.format.models.TNamed
+import io.github.thisismeamir.rootkt.format.models.base.TNamed
+import io.github.thisismeamir.rootkt.streamer.models.types.StreamerType
 
-data class TStreamerLoop(
+data class TStreamerBasicPointer(
     override val byteCount: Int,
     override val version: Short,
     override val named: TNamed,

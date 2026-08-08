@@ -1,6 +1,6 @@
 package io.github.thisismeamir.rootkt.streamer
 
-import io.github.thisismeamir.rootkt.format.walkers.readTString
+import io.github.thisismeamir.rootkt.format.parsers.base.parseTString
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.test.Test
@@ -12,14 +12,14 @@ class StreamerPrimitivesTest {
     fun `readTString reads short string`() {
         val buf = ByteBuffer.allocate(10).order(ByteOrder.BIG_ENDIAN)
         buf.put(5); buf.put("hello".toByteArray()); buf.rewind()
-        assertEquals("hello", buf.readTString())
+        assertEquals("hello", buf.parseTString())
     }
 
     @Test
     fun `readTString reads empty string`() {
         val buf = ByteBuffer.allocate(1).order(ByteOrder.BIG_ENDIAN)
         buf.put(0); buf.rewind()
-        assertEquals("", buf.readTString())
+        assertEquals("", buf.parseTString())
     }
 
     @Test
@@ -30,7 +30,7 @@ class StreamerPrimitivesTest {
         buf.putInt(300)
         buf.put(long.toByteArray())
         buf.rewind()
-        assertEquals(long, buf.readTString())
+        assertEquals(long, buf.parseTString())
     }
 
     @Test

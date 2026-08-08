@@ -1,7 +1,7 @@
 package io.github.thisismeamir.rootkt.streamer
 
-import io.github.thisismeamir.rootkt.streamer.models.StreamerType
-import io.github.thisismeamir.rootkt.streamer.walkers.toStreamerType
+import io.github.thisismeamir.rootkt.streamer.models.types.StreamerType
+import io.github.thisismeamir.rootkt.streamer.conversions.toStreamerType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

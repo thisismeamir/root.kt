@@ -1,9 +1,8 @@
 package io.github.thisismeamir.rootkt.streamer.service
 
-import io.github.thisismeamir.rootkt.format.models.Record
-import io.github.thisismeamir.rootkt.format.models.TKey
-import io.github.thisismeamir.rootkt.format.models.TList
-import io.github.thisismeamir.rootkt.streamer.models.TStreamerInfo
+import io.github.thisismeamir.rootkt.format.models.base.TKey
+import io.github.thisismeamir.rootkt.format.models.list.TList
+import io.github.thisismeamir.rootkt.streamer.models.streamerinfo.TStreamerInfo
 
 class StreamerRegistry(
     val key: TKey,

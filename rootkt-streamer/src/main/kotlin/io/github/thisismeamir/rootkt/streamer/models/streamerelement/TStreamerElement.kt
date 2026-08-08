@@ -1,6 +1,7 @@
-package io.github.thisismeamir.rootkt.streamer.models
+package io.github.thisismeamir.rootkt.streamer.models.streamerelement
 
-import io.github.thisismeamir.rootkt.format.models.TNamed
+import io.github.thisismeamir.rootkt.format.models.base.TNamed
+import io.github.thisismeamir.rootkt.streamer.models.types.StreamerType
 
 sealed interface TStreamerElement{
     val byteCount: Int

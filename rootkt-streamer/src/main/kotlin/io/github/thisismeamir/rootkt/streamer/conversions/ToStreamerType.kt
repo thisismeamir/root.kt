@@ -1,7 +1,6 @@
-package io.github.thisismeamir.rootkt.streamer.walkers
+package io.github.thisismeamir.rootkt.streamer.conversions
 
-import io.github.thisismeamir.rootkt.format.utils.K_BYTE_COUNT_MASK
-import io.github.thisismeamir.rootkt.streamer.models.StreamerType
+import io.github.thisismeamir.rootkt.streamer.models.types.StreamerType
 
 fun Int.toStreamerType(): StreamerType {
     val typename = this

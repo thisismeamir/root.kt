@@ -1,8 +1,8 @@
 package io.github.thisismeamir.rootkt.streamer
 
-import io.github.thisismeamir.rootkt.format.walkers.K_CLASS_MASK
-import io.github.thisismeamir.rootkt.format.walkers.K_NEW_CLASS_TAG
-import io.github.thisismeamir.rootkt.format.walkers.readClassInfo
+import io.github.thisismeamir.rootkt.format.parsers.classinfo.K_CLASS_MASK
+import io.github.thisismeamir.rootkt.format.parsers.classinfo.K_NEW_CLASS_TAG
+import io.github.thisismeamir.rootkt.format.parsers.classinfo.parseClassInfo
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import java.nio.ByteBuffer
@@ -22,7 +22,7 @@ class ReadClassInfoTest {
         bytes.put(0)
         bytes.flip()
 
-        val info = bytes.readClassInfo()
+        val info = bytes.parseClassInfo()
         assertTrue(info.isNewClass)
         assertEquals(name, info.className)
         assertNull(info.clIdx)
@@ -36,7 +36,7 @@ class ReadClassInfoTest {
         buf.putInt(tagged)
         buf.flip()
 
-        val info = buf.readClassInfo()
+        val info = buf.parseClassInfo()
         assertFalse(info.isNewClass)
         assertEquals(offset, info.clIdx)
         assertNull(info.className)
@@ -49,7 +49,7 @@ class ReadClassInfoTest {
         buf.put(0)
         buf.flip()
 
-        val info = buf.readClassInfo()
+        val info = buf.parseClassInfo()
         assertEquals("", info.className)
     }
 }
